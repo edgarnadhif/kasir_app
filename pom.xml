@@ -12,6 +12,10 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+        <sonar.organization>edgarnadhif</sonar.organization> <sonar.projectKey>edgarnadhif_kasir_app</sonar.projectKey>
+        <sonar.host.url>https://sonarcloud.io</sonar.host.url>
+        <sonar.maven.plugin.version>3.11.0.3922</sonar.maven.plugin.version>
     </properties>
 
     <dependencies>
@@ -30,7 +34,8 @@
                 <artifactId>exec-maven-plugin</artifactId>
                 <version>3.5.1</version>
                 <configuration>
-                    <mainClass>com.kasir.KasirApp</mainClass> </configuration>
+                    <mainClass>com.kasir.KasirApp</mainClass>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
@@ -41,10 +46,18 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>com.kasir.KasirApp</mainClass> </manifest>
+                            <mainClass>com.kasir.KasirApp</mainClass>
+                        </manifest>
                     </archive>
                 </configuration>
             </plugin>
+
+            <plugin>
+                <groupId>org.sonarsource.scanner.maven</groupId>
+                <artifactId>sonar-maven-plugin</artifactId>
+                <version>${sonar.maven.plugin.version}</version>
+            </plugin>
+
         </plugins>
     </build>
 </project>
