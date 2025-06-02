@@ -12,7 +12,7 @@ public class CartItem {
     public Product getProduct() {
         return product;
     }
-
+a
     public int getQuantity() {
         return quantity;
     }
