@@ -1,0 +1,69 @@
+package com.kasir.model;
+
+import org.junit.Before; // Diperlukan untuk @Before
+import org.junit.Test;
+import static org.junit.Assert.*;
+
+public class ProductTest {
+
+    @Before // Penting: Reset ID counter sebelum setiap test
+    public void setUp() {
+        Product.resetNextId(); // Pastikan ID dimulai dari 1 untuk setiap test
+    }
+
+    @Test // Test untuk konstruktor (nama, harga) dan getter
+    public void testProductCreationWithNameAndPrice() {
+        Product product = new Product("Nasi Goreng", 15000.0); // Menggunakan konstruktor baru
+        assertNotNull("Objek produk tidak boleh null", product);
+        assertEquals("ID produk seharusnya 1", 1, product.getId()); // ID pertama harus 1
+        assertEquals("Nama produk tidak sesuai", "Nasi Goreng", product.getName());
+        assertEquals("Harga produk tidak sesuai", 15000.0, product.getPrice(), 0.001);
+        assertEquals("Stok default produk seharusnya 0", 0, product.getStock()); // Stok default dari konstruktor
+    }
+
+    @Test // Test untuk konstruktor (nama, harga, stok) dan getter
+    public void testProductCreationWithNamePriceAndStock() {
+        Product product = new Product("Mie Ayam", 12000.0, 25); // Menggunakan konstruktor dengan stok
+        assertNotNull("Objek produk tidak boleh null", product);
+        assertEquals("ID produk seharusnya 1", 1, product.getId()); // ID pertama (setelah reset) harus 1
+        assertEquals("Nama produk tidak sesuai", "Mie Ayam", product.getName());
+        assertEquals("Harga produk tidak sesuai", 12000.0, product.getPrice(), 0.001);
+        assertEquals("Stok produk tidak sesuai", 25, product.getStock());
+    }
+
+    @Test
+    public void testIdAutoIncrement() {
+        Product product1 = new Product("Kopi", 8000.0); // ID 1
+        Product product2 = new Product("Teh", 7000.0);  // ID 2
+        assertEquals("ID produk pertama seharusnya 1", 1, product1.getId());
+        assertEquals("ID produk kedua seharusnya 2", 2, product2.getId());
+    }
+
+    @Test
+    public void testSetStock() {
+        Product product = new Product("Es Teh Manis", 5000.0);
+        product.setStock(15);
+        assertEquals("Stok seharusnya berubah menjadi 15", 15, product.getStock());
+    }
+
+    @Test
+    public void testSetName() {
+        Product product = new Product("Bakso", 10000.0);
+        product.setName("Bakso Pedas");
+        assertEquals("Nama seharusnya berubah menjadi Bakso Pedas", "Bakso Pedas", product.getName());
+    }
+
+    @Test
+    public void testSetPrice() {
+        Product product = new Product("Miso", 12000.0);
+        product.setPrice(13000.0);
+        assertEquals("Harga seharusnya berubah menjadi 13000.0", 13000.0, product.getPrice(), 0.001);
+    }
+
+    @Test
+    public void testToString() {
+        Product product = new Product("Susu", 4000.0, 30);
+        String expectedString = "ID: 1, Nama: Susu, Harga: 4000.0, Stok: 30"; // ID 1 karena reset di Before
+        assertEquals("Metode toString() tidak menghasilkan output yang benar", expectedString, product.toString());
+    }
+}

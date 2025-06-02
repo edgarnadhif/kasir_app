@@ -17,21 +17,21 @@ public class CartService {
 
         boolean found = false;
         for (CartItem item : cartItems) {
-            // Jika produk sudah ada di keranjang, tambahkan kuantitasnya
+
             if (item.getProduct().getId() == product.getId()) {
                 item.setQuantity(item.getQuantity() + quantity);
                 found = true;
                 break;
             }
         }
-        // Jika belum ada, tambahkan sebagai item baru
+
         if (!found) {
             cartItems.add(new CartItem(product, quantity));
         }
     }
 
     public List<CartItem> getCartItems() {
-        // Mengembalikan unmodifiable list untuk mencegah modifikasi eksternal
+
         return Collections.unmodifiableList(cartItems);
     }
 

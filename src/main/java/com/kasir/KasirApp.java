@@ -89,9 +89,8 @@ public class KasirApp {
                     } else {
                         System.out.println("Total belanja: " + CurrencyUtil.format(total));
                         System.out.println("Terima kasih sudah berbelanja!");
-                        cartService.clearCart(); // Kosongkan keranjang setelah checkout
+                        cartService.clearCart(); 
                     }
-                    // Aplikasi akan keluar jika memilih 5 atau 0
                     return;
                 }
                 case 0 -> {
